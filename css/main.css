@@ -1,0 +1,37 @@
+body { width: 90%; background-color: #FFE898 }
+.accordion-item h3 { margin: 0 auto; font-size: 1.1em; padding: 0.4em; color: #fff; background-color: #240F3A; }
+.accordion-item h3:hover { cursor: pointer; }
+.accordion-item div { margin: 0 auto; padding: 1em 0.4em; background-color: #8157AC; }
+.accordion-item.hide h3 { color: #000; background-color: #4F2C73; }
+.accordion-item.hide div { display: none; }
+
+h1 {
+    margin: 0 auto;
+    width: 90%;
+    text-align: center;
+}
+
+pre {
+    max-width: 90%;
+    overflow-x: scroll;
+    overflow-y: visible;
+    margin: 0 auto;
+}
+
+#errors {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.error {
+    border: 3px solid red;
+}
+
+.error h3 { float:left;
+    width: 20%;
+}
+
+.error div {
+    /*float: right;*/
+    width: 70%;
+}
