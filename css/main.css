@@ -23,6 +23,11 @@ body {
 }
 .accordion-item h3:hover { cursor: pointer; }
 .accordion-item span {
+    -moz-user-select: none; 
+    -khtml-user-select: none; 
+    -webkit-user-select: none; 
+    -o-user-select: none;
+    user-select: none;
     position: absolute;
     right: 0%;
     padding: 0.4em;
