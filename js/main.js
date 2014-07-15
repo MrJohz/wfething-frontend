@@ -19,11 +19,19 @@
         "Hey, I just met you, and this is crazy, but here's my number, so call me, maybe? Oh, wait, you can't. Because I misspelt my number, like you misspelt that region.  (With all due respect to Solm!)"
     ];
 
-    var ERRORS_SERVER_ERROR = [
+    var ERRORS_UNKNOWN_SERVER = [
         "Erm.  So something broke somewhere.  It's probably fine, but for now, I'd recommend preparing for nuclear holocaust.",
-        "The internet is not currently available.",
-        "Using the internet when there's no internet?  Genius!  That approach to life is ideal in a Chief of Printing - have you ever thought about applying?",
         "The system has detected that you are a secret raider spy.  The system is always right.  All hail the system.",
+        "The server's down!  The server's down!  For the love of God, will somebody do something?  (Think of the children!)",
+        "This error is in no way a codi\"<&amp;#92ERROR);DROP TABLE wfes;",
+        "Look, don't blame me.  It wasn't my fault.  I just built the thing.  You can't expect me to make sure it runs as well!",
+        "I blame the Canadian moose."
+    ];
+
+    var ERRORS_UNKNOWN_CONNECTION = [
+        "Using the internet when there's no internet?  Genius!  That approach to life is ideal in a Chief of Printing - have you ever thought about applying?",
+        "The internet is not currently available.",
+        "Please ask Bill Gates to switch the internet back on.",
         "I blame the Canadian moose."
     ]
 
@@ -56,7 +64,9 @@
             case 0:
                 return choose(ERRORS_UNKNOWN_REGION);
             case 1:
-                return choose(ERRORS_SERVER_ERROR);
+                return choose(ERRORS_UNKNOWN_SERVER);
+            case 2:
+                return choose(ERRORS_UNKNOWN_CONNECTION);
             default:
                 return choose(ERRORS_UNKNOWN_ERROR_MESSAGE);
         }
@@ -166,12 +176,19 @@
             this.curRegion.set(res);
         }).bind(this),
         (function(res, ajax) {
-            console.log(ajax);
-            this.errors.push({
-                errorname: "Server Down",
-                errorcode: 1,
-                errortext: getRandomErrorMessage(1)
-            })
+            if (ajax.status == 502) {
+                this.errors.push({
+                    errorname: "Server Down",
+                    errorcode: 1,
+                    errortext: getRandomErrorMessage(1)
+                })
+            } else {
+                this.errors.push({
+                    errorname: "No Connection",
+                    errorcode: 2,
+                    errortext: getRandomErrorMessage(2)
+                })
+            }
         }).bind(this))
     };
 
