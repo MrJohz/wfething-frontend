@@ -46,6 +46,8 @@
     
     var BASEURL = "http://wfe2.johz.me/"
 
+    var HISTORY_EXISTS = ("history" in window && "replaceState" in history);
+
 
 
     /** USEFUL FUNCTIONS **/
@@ -111,6 +113,13 @@
 
     function endsWith(str, suffix) {
         return str.indexOf(suffix, str.length - suffix.length) !== -1;
+    }
+
+    function changeQueryArgs(newquery, data) {
+        if (!HISTORY_EXISTS) { return false; }
+
+        history.replaceState(data, "", "/?r=" + newquery);
+        return true;
     }
 
 
@@ -249,6 +258,9 @@
                 })
                 return;
             }
+
+            var sName = simple(newRegion.name);
+            changeQueryArgs(sName, newRegion);
 
             newRegion.data.forEach(function(wfeObj, index, array) {
                 wfeObj.dateStr = moment.unix(wfeObj.date).format("D/M/YYYY")
