@@ -27,7 +27,8 @@
         "The server's down!  The server's down!  For the love of God, will somebody do something?  (Think of the children!)",
         "This error is in no way a codi\"<&amp;#92ERROR);DROP TABLE wfes;",
         "Look, don't blame me.  It wasn't my fault.  I just built the thing.  You can't expect me to make sure it runs as well!",
-        "I blame the Canadian moose."
+        "I blame the Canadian moose.",
+        "I have to say, your plan to make this system work even faster by connecting to a broken server is truly admirable.  Why not apply to be Chief of Printing?"
     ];
 
     var ERRORS_UNKNOWN_CONNECTION = [
@@ -63,7 +64,15 @@
         return choices[index];
     }
 
+    var totErrors = 0;
     var getRandomErrorMessage = function(errorCode) {
+        totErrors++;
+
+        if (totErrors > 5) {
+            totErrors = 0;
+            return "Clearly you're the kind of person that keeps on persisting.  That's the sort of person we need for Chief of Printing, have you thought about applying?";
+        }
+
         switch(errorCode) {
             case 0:
                 return choose(ERRORS_UNKNOWN_REGION);
