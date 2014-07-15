@@ -70,7 +70,7 @@
 
         if (totErrors > 5) {
             totErrors = 0;
-            return "Clearly you're the kind of person that keeps on persisting.  That's the sort of person we need for Chief of Printing, have you thought about applying?";
+            return "Clearly you're the kind of person that keeps on persisting despite all these errors.  That's the sort of person we need for Chief of Printing, have you thought about applying?";
         }
 
         switch(errorCode) {
@@ -131,6 +131,31 @@
         return true;
     }
 
+    function selectText(element) {
+        var doc = document;
+        var text = element;    
+
+        if (doc.body.createTextRange) { // ms
+            var range = doc.body.createTextRange();
+            range.moveToElementText(text);
+            range.select();
+        } else if (window.getSelection) { // moz, opera, webkit
+            var selection = window.getSelection();            
+            var range = doc.createRange();
+            range.selectNodeContents(text);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+    }
+
+    function unSelectText() {
+        if (window.getSelection) {
+            window.getSelection().removeAllRanges();
+        } else if (document.selection) {
+            document.selection.empty();
+        }
+    }
+
 
     /** SETUP ENVIRONMENT **/
 
@@ -155,11 +180,14 @@
 
     Accordionator.prototype.accordionate = function(element) {
         var h2;
+        var pre;
         var self = this;
 
         for ( var i = 0; i < element.childNodes.length; i++ ) {
             if ( element.childNodes[i].nodeName == "H3" ) {
                 h2 = element.childNodes[i];
+            } else if ( element.childNodes[i].nodeName == "DIV" ) {
+                pre = element.childNodes[i].childNodes[1];
             }
         }
 
@@ -172,6 +200,14 @@
                 this.parentNode.className = 'accordion-item'
             }
         });
+
+        pre.addEventListener('mouseover', function(e) {
+            selectText(this);
+        })
+
+        pre.addEventListener('mouseout', function(e) {
+            unSelectText();
+        })
 
         return element;
     }
