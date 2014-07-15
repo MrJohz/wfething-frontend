@@ -1,14 +1,28 @@
-body { width: 90%; background-color: #FFE898 }
-.accordion-item h3 { margin: 0 auto; font-size: 1.1em; padding: 0.4em; color: #fff; background-color: #240F3A; }
+body {
+    width: 90%;
+    margin: 0 auto;
+    background-color: #F5F7F4;
+    font-family: 'Raleway', sans-serif;
+}
+.accordion-item h3 { margin: 0 auto; font-size: 1.1em; padding: 0.4em; color: #fff; background-color: green; padding-left: 10%; }
 .accordion-item h3:hover { cursor: pointer; }
-.accordion-item div { margin: 0 auto; padding: 1em 0.4em; background-color: #8157AC; }
-.accordion-item.hide h3 { color: #000; background-color: #4F2C73; }
+.accordion-item.hide h3 { color: #000; background-color: #78BC3F; }
 .accordion-item.hide div { display: none; }
+.accordion-item div {
+    margin: 0 auto;
+    padding: 1em 0.4em;
+    background-color: #F0FFF0;
+    border: solid 2px #696;
+    border-top-width: 0px;
+}
 
 h1 {
+    font-size: 4em;
+    color: green;
     margin: 0 auto;
     width: 90%;
     text-align: center;
+    font-family: 'Lobster', cursive;
 }
 
 pre {
@@ -24,14 +38,30 @@ pre {
 }
 
 .error {
-    border: 3px solid red;
+    color:#FF3333;
+    border: solid 2px #CC6666;
+    border-radius:12px;
+    overflow: hidden;
+    padding: 5px;
 }
 
-.error h3 { float:left;
+.error table {
+    height: 100%;
+}
+
+.error .errorname {
+    font-size: 1.6em;
+    font-style: bold;
+    font-family: 'Lobster', cursive;
+    height: 100%;
+    vertical-align: middle;
+    text-align: center;
     width: 20%;
 }
 
-.error div {
-    /*float: right;*/
+.error .errortext {
+    height: 100%;
+    vertical-align: middle;
+    text-align: center;
     width: 70%;
 }

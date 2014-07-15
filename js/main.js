@@ -43,50 +43,12 @@
                 return choose(ERRORS_UNKNOWN_ERROR_MESSAGE);
         }
     }
-
-    function fadeOut(element, func) {
-        if (typeof func === "undefined") {
-            func = NOOP;
-        }
-
-        var op = 1;  // initial opacity
-        var timer = setInterval(function () {
-            if (op <= 0.1){
-                clearInterval(timer);
-                element.style.display = 'none';
-                func.call(element);
-            }
-            element.style.opacity = op;
-            element.style.filter = 'alpha(opacity=' + op * 100 + ")";
-            op -= op * 0.1;
-        }, 50);
-    }
-
-    function fadeIn(element, func) {
-        if (typeof func === "undefined") {
-            func = NOOP;
-        }
-
-        var op = 0.1;  // initial opacity
-        var hasNulled = true;
-        var timer = setInterval(function () {
-            element.style.opacity = op;
-            element.style.filter = 'alpha(opacity=' + op * 100 + ")";
-
-            if (hasNulled && op > 0.1 ){
-                element.style.display = null;
-                hasNulled = false;
-            } else if (op >= 0.9) {
-                clearInterval(timer);
-                func.call(element);
-            }
-            op += op * 0.1;
-        }, 25);
-    }
     
     function domFromString(s) {
         var div = document.createElement('div');
         div.innerHTML = s.trim();
+        console.log(div.innerHTML);
+        console.log(div);
         return div.firstChild;
     }
 
@@ -152,13 +114,14 @@
         name = simple(name);
         if (this.cache.has(name)) {
             this.curRegion.set(this.cache.get(name));
+            return;
         }
 
-        microAjax(BASEURL + "api/" + name, (function(res) {
+        n.io(BASEURL + "api/" + name).success((function(res) {
             jsn = JSON.parse(res);
             this.cache.set(name, jsn);
             this.curRegion.set(jsn);
-        }).bind(this))
+        }).bind(this)).get();
     };
 
     window.app = new WFEThing();
@@ -196,6 +159,7 @@
                 errorcode: 0,
                 errortext: getRandomErrorMessage(0)
             })
+            return;
         }
 
         newRegion.data.forEach(function(wfeObj, index, array) {
@@ -216,17 +180,11 @@
     })
 
     app.errors.handler("push", function(addition, newErrorList, oldErrorList) {
-        var errorDiv = document.getElementById("errors")
-        var message = domFromString(Handlebars.templates.errors({error: addition}));
-        message.style.display = "none";
-        errorDiv.insertBefore(message, errorDiv.firstChild);
-        fadeIn(message);
-
-        setTimeout(function() {
-            fadeOut(message, function() {
-                errorDiv.removeChild(message);
-            })
-        }, 5000)
+        var errorDiv = n.one("#errors");
+        var message = n.node.create(Handlebars.templates.errors({error: addition}));
+        message.setStyle("height", 0);
+        errorDiv.prepend(message);
+        message.anim({height: 70}, 1, "ease-in").wait(5).anim({height: 0}, 1, "ease-in").wait(1).remove();
     })
 
 })(window);
