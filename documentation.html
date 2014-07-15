@@ -17,15 +17,15 @@
             </div>
         </h1>
 
-        <p>This is the WFE Thing.  It Things your WFEs.</p>
+        <p><strong>This is the WFE Thing.  It Things your WFEs.</strong></p>
 
         <p>Enter the region name in the textbox.  Press submit, or enter, or something.  Click on dates.  Win.</p>
 
-        <p>Power Usage Tip #1:  The colour little unicode icon at the far right of each green box is determined by hashing the wfe.  Essentially, if the wfe changes, that colour will change.  If two icons are the same colour, the wfes are (probably) the same, so you don't need to check both of them to find out if they are a raider WFE.</p>
+        <p><strong>Power Usage Tip #1:</strong>  The colour little unicode icon at the far right of each green box is determined by hashing the wfe.  Essentially, if the wfe changes, that colour will change.  If two icons are the same colour, the wfes are (probably) the same, so you don't need to check both of them to find out if they are a raider WFE.</p>
 
-        <p>Power Usage Tip #2:  The WFEs are obtained by daily dumps.  If you have a favourite dump that you want to see featured, speak to Johz on IRC, or Tlik on the nationstates site.  Or Tlik on IRC.  Or maybe even Johz on the nationstates site, when I find the password to my main again.</p>
+        <p><strong>Power Usage Tip #2:</strong>  The WFEs are obtained by daily dumps.  If you have a favourite dump that you want to see featured, speak to Johz on IRC, or Tlik on the nationstates site.  Or Tlik on IRC.  Or maybe even Johz on the nationstates site, when I find the password to my main again.</p>
 
-        <p>Power Usage Tip #3:  All the information you see on the main page is obtained via the api server.  If you understand JSON, and you want access to all the WFEs in an even more ugly manner than the original Johz-WFE thing, then hit <a href="/api/kyzikos"><code>/api/[region-name]</code></a>.  The root API url will give you a json object with a list of all the region names that are available (try not to use this, it's a pretty large file), while the region-name endpoint will give a json object containg the "pretty" name of the region you're trying to look at, and a list of all the wfes.  The date key is a UNIX timestamp, that is, seconds since 1st January 1970.  Appending <a href="/api/kyzikos?pretty"><code>?pretty</code></a> to any api url will pretty-print the json, but try not to use that in your app, just for debugging.</p>
+        <p><strong>Power Usage Tip #3:</strong>  All the information you see on the main page is obtained via the api server.  If you understand JSON, and you want access to all the WFEs in an even more ugly manner than the original Johz-WFE thing, then hit <a href="/api/kyzikos"><code>/api/[region-name]</code></a>.  The root API url will give you a json object with a list of all the region names that are available (try not to use this, it's a pretty large file), while the region-name endpoint will give a json object containg the "pretty" name of the region you're trying to look at, and a list of all the wfes.  The date key is a UNIX timestamp, that is, seconds since 1st January 1970.  Appending <a href="/api/kyzikos?pretty"><code>?pretty</code></a> to any api url will pretty-print the json, but try not to use that in your app, just for debugging.</p>
 
         <p><strong>List of things that I need to do:</strong></p>
         <ul>
@@ -33,7 +33,7 @@
             <li class="completed">Need a response to server down error.  Like, I really need that one.  May have to stop using the nwt.js thing.</li>
             <li class="completed">Prettyify search bar.</li>
             <li>Make it easier to copy the WFEs.</li>
-            <li>Link-to-region ?shortcut.</li>
+            <li class="completed">Link-to-region ?shortcut.</li>
             <li>Long term: Sort out access to the nsarchives.net page.</li>
         </ul>
 

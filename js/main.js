@@ -1,5 +1,7 @@
 (function(window) {
 
+    "use strict";
+
     if ("Map" in window) {
         console.log("Using ES6 Map implementation");
     } else {
@@ -95,13 +97,29 @@
         return colour;
     }
 
+    function getUrlVars() {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for(var i = 0; i < hashes.length; i++)
+        {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
+
+    function endsWith(str, suffix) {
+        return str.indexOf(suffix, str.length - suffix.length) !== -1;
+    }
+
 
     /** SETUP ENVIRONMENT **/
 
     Handlebars.registerHelper("colorme", function(wfe) {
-        color = stringToColour(wfe)
+        var color = stringToColour(wfe);
 
-        str = '<span style="color:' + color + '">&#9673;</span>'
+        var str = '<span style="color:' + color + '">&#9673;</span>';
 
         return new Handlebars.SafeString(str)
     })
@@ -198,62 +216,79 @@
 
     /** HANDLERS **/
 
-    document.getElementById('region-submit').addEventListener("click", function(e) {
-        if (!e) {var e = window.event; }
-        e.preventDefault();
+    var onLoadFunc = function() {
 
-        var regionName = document.getElementById('region-input').value
-        if (regionName && regionName.length > 0) {
-            var elem = document.getElementById('region-input');
-            app.getRegion(elem.value);
-            elem.value = ''
-        }
-        return false;
-    }, false);
-
-    document.getElementById("region-input").addEventListener("keydown", function(e) {
-        if (!e) { var e = window.event; }
-        if (e.keyCode == 13) {
+        document.getElementById('region-submit').addEventListener("click", function(e) {
+            if (!e) {var e = window.event; }
             e.preventDefault();
-            app.getRegion(this.value);
-            this.value = '';
-        }
-    }, false);
 
-    app.curRegion.handler(function(operation, newRegion, oldRegion) {
-        if (typeof newRegion.name == "undefined" || newRegion.name == null) {
-            this.errors.push({
-                errorname: "Unknown Region",
-                errorcode: 0,
-                errortext: getRandomErrorMessage(0)
+            var regionName = document.getElementById('region-input').value
+            if (regionName && regionName.length > 0) {
+                var elem = document.getElementById('region-input');
+                app.getRegion(elem.value);
+                elem.value = ''
+            }
+            return false;
+        }, false);
+
+        document.getElementById("region-input").addEventListener("keydown", function(e) {
+            if (!e) { var e = window.event; }
+            if (e.keyCode == 13) {
+                e.preventDefault();
+                app.getRegion(this.value);
+                this.value = '';
+            }
+        }, false);
+
+        app.curRegion.handler(function(operation, newRegion, oldRegion) {
+            if (typeof newRegion.name == "undefined" || newRegion.name == null) {
+                this.errors.push({
+                    errorname: "Unknown Region",
+                    errorcode: 0,
+                    errortext: getRandomErrorMessage(0)
+                })
+                return;
+            }
+
+            newRegion.data.forEach(function(wfeObj, index, array) {
+                wfeObj.dateStr = moment.unix(wfeObj.date).format("D/M/YYYY")
             })
-            return;
+
+            var acc = new Accordionator();
+
+            document.getElementById("results-header").innerHTML = newRegion.name;
+            var results = document.getElementById("results");
+            n.node.create(Handlebars.templates.results(newRegion).trim()).all(".accordion-item").each(function(el) {
+                acc.add(el._node /* TODO: Find a better way to put this */);
+            })
+            results.innerHTML = "";
+            acc.elems.forEach(function(elem) {
+                results.appendChild(elem);
+            })
+            acc.init();
+        })
+
+        app.errors.handler("push", function(addition, newErrorList, oldErrorList) {
+            var errorDiv = n.one("#errors");
+            var message = n.node.create(Handlebars.templates.errors({error: addition}));
+            message.setStyle("height", 0);
+            errorDiv.prepend(message);
+            message.anim({height: 70}, 1, "ease-in").wait(5).anim({height: 0}, 1, "ease-in").wait(1).remove();
+        })
+
+        var queries = getUrlVars();
+        if ("r" in queries) {
+            var r = queries.r;
+            if (endsWith(r, '/')) {
+                app.getRegion(r.substring(0, r.length - 1));
+            } else {
+                app.getRegion(queries.r);
+            }
         }
 
-        newRegion.data.forEach(function(wfeObj, index, array) {
-            wfeObj.dateStr = moment.unix(wfeObj.date).format("D/M/YYYY")
-        })
+    }
 
-        acc = new Accordionator();
-
-        document.getElementById("results-header").innerHTML = newRegion.name;
-        var results = document.getElementById("results");
-        n.node.create(Handlebars.templates.results(newRegion).trim()).all(".accordion-item").each(function(el) {
-            acc.add(el._node /* TODO: Find a better way to put this */);
-        })
-        results.innerHTML = "";
-        acc.elems.forEach(function(elem) {
-            results.appendChild(elem);
-        })
-        acc.init();
-    })
-
-    app.errors.handler("push", function(addition, newErrorList, oldErrorList) {
-        var errorDiv = n.one("#errors");
-        var message = n.node.create(Handlebars.templates.errors({error: addition}));
-        message.setStyle("height", 0);
-        errorDiv.prepend(message);
-        message.anim({height: 70}, 1, "ease-in").wait(5).anim({height: 0}, 1, "ease-in").wait(1).remove();
-    })
+    domready(onLoadFunc);
 
 })(window);
+
