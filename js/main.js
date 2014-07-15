@@ -164,8 +164,6 @@
         }
 
         newRegion.data.forEach(function(wfeObj, index, array) {
-            /* We should probably fix this on the server-upload script, but for now... */
-            wfeObj.wfe = wfeObj.wfe.replace(/&amp;/g, "&");
             wfeObj.dateStr = moment.unix(wfeObj.date).format("D/M/YYYY")
         })
 
