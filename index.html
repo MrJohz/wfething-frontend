@@ -10,15 +10,16 @@
     </head>
 
     <body>
-        <h1><!--
-            -->The WFE Thing<!--
+        <h1>
+            <a href="/">The WFE Thing</a>
             <div id="popupmenu">
-                <a href="http://s4.zetaboards.com/UDL/index/">The UDL</a> | <a href="/documentation.html">Documentation</a> | <a href="http://johz.me">Johz</a>
+                <a href="/documentation.html">Documentation</a> &#183; <a href="http://s4.zetaboards.com/UDL/index/">The UDL</a> &#183; <a href="http://nationstates.net">NationStates</a>
             </div>
-        --></h1>
+        </h1>
 
-
-        <input type="search" id="region-input" results=10 autosave="region-input"><input type="button" id="region-submit" value="Submit">
+        <div id="input-container">
+            <input type="text" id="region-input"><input type="button" id="region-submit" value="Submit">
+        </div>
 
         <div id="errors"></div>
 
@@ -30,6 +31,7 @@
             <!-- LIBRARIES -->
             <script src="/js/moment.min.js"></script>
             <script src="/js/nwt.min.js"></script>
+            <script src="/js/majax.min.js"></script>
             <script src="/js/observables.js"></script>
             <script src="/js/blitzCollections.js"></script>
             <script src="/js/handlebars.runtime-v1.3.0.js"></script>

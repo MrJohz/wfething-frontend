@@ -19,6 +19,14 @@
         "Hey, I just met you, and this is crazy, but here's my number, so call me, maybe? Oh, wait, you can't. Because I misspelt my number, like you misspelt that region.  (With all due respect to Solm!)"
     ];
 
+    var ERRORS_SERVER_ERROR = [
+        "Erm.  So something broke somewhere.  It's probably fine, but for now, I'd recommend preparing for nuclear holocaust.",
+        "The internet is not currently available.",
+        "Using the internet when there's no internet?  Genius!  That approach to life is ideal in a Chief of Printing - have you ever thought about applying?",
+        "The system has detected that you are a secret raider spy.  The system is always right.  All hail the system.",
+        "I blame the Canadian moose."
+    ]
+
     var ERRORS_UNKNOWN_ERROR_MESSAGE = [
         "An error happened.  Hold on while we try to work out what error it was.",
         "There was an error.  Then, when we tried to work out what the error was, we got another error.  Rest assured that the codemonkeys are all fired.",
@@ -47,6 +55,8 @@
         switch(errorCode) {
             case 0:
                 return choose(ERRORS_UNKNOWN_REGION);
+            case 1:
+                return choose(ERRORS_SERVER_ERROR);
             default:
                 return choose(ERRORS_UNKNOWN_ERROR_MESSAGE);
         }
@@ -140,16 +150,29 @@
 
     WFEThing.prototype.getRegion = function(name) {
         name = simple(name);
+
         if (this.cache.has(name)) {
             this.curRegion.set(this.cache.get(name));
             return;
         }
 
-        n.io(BASEURL + "api/" + name).success((function(res) {
-            jsn = JSON.parse(res);
-            this.cache.set(name, jsn);
-            this.curRegion.set(jsn);
-        }).bind(this)).get();
+        majaX({
+            url: BASEURL + "api/" + name,
+            method: "get",
+            json: true
+        },
+        (function(res) {
+            this.cache.set(name, res);
+            this.curRegion.set(res);
+        }).bind(this),
+        (function(res, ajax) {
+            console.log(ajax);
+            this.errors.push({
+                errorname: "Server Down",
+                errorcode: 1,
+                errortext: getRandomErrorMessage(1)
+            })
+        }).bind(this))
     };
 
     window.app = new WFEThing();
