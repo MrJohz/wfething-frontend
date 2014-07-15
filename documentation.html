@@ -27,6 +27,8 @@
 
         <p><strong>Power Usage Tip #3:</strong>  All the information you see on the main page is obtained via the api server.  If you understand JSON, and you want access to all the WFEs in an even more ugly manner than the original Johz-WFE thing, then hit <a href="/api/kyzikos"><code>/api/[region-name]</code></a>.  The root API url will give you a json object with a list of all the region names that are available (try not to use this, it's a pretty large file), while the region-name endpoint will give a json object containg the "pretty" name of the region you're trying to look at, and a list of all the wfes.  The date key is a UNIX timestamp, that is, seconds since 1st January 1970.  Appending <a href="/api/kyzikos?pretty"><code>?pretty</code></a> to any api url will pretty-print the json, but try not to use that in your app, just for debugging.</p>
 
+        <p><strong>This site is dedicated to Solm, because he made the original version, which was awesome.  Additionally, I'd like to take a moment to apologise to the UDL for giving them the shitty older version, and to thank them for putting up with me.  Finally, I should disclaim that any damage you take from using this site is entirely your own fault for using it.  Do not use this in a nuclear power plant.  Do not wash this site in a washing machine.</strong></p>
+
         <p><strong>List of things that I need to do:</strong></p>
         <ul>
             <li>Add more WFEs.  Always.  There are never enough WFEs.</li>
