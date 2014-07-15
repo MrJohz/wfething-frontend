@@ -1,5 +1,12 @@
 (function(window) {
 
+    if (Map in window) {
+        console.log("Using ES6 Map implementation");
+    } else {
+        window.Map = blitz.Map;
+        console.log("Using Blitz Map implementation");
+    }
+
 
     /** ERROR LISTS & OTHER CONSTANTS **/
     var ERRORS_UNKNOWN_REGION = [
@@ -101,8 +108,6 @@
         }
 
         h2.addEventListener('click', function(e) {
-            console.log(this);
-            console.log(this.parentNode);
             var itemClass = this.parentNode.className;
             self.elems.forEach(function(elem) {
                 elem.className = "accordion-item hide";

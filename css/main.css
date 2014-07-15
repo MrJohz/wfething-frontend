@@ -50,7 +50,26 @@ h1 {
     width: 90%;
     text-align: center;
     font-family: 'Lobster', cursive;
+}/*
+
+#popupmenu {
+    padding: 1px 10px 1px 10px;
+    text-align:center;
+    border-radius: 8px;
+    -moz-border-radius:8px;
+    background:black;
+    color:white;
+    display:none;
+    font-family:Arial;
+    -webkit-transition: all 500ms;
+    transition: all 500ms;
 }
+
+h1:hover #popupmenu {
+    display: block;
+    opacity: .75;
+    filter: alpha(opacity=75);
+}*/
 
 pre {
     max-width: 90%;
