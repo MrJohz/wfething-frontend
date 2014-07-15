@@ -3,12 +3,14 @@
 templates['results'] = template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
+  var buffer = "", stack1, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, functionType="function", self=this;
 
 function program1(depth0,data) {
   
-  var buffer = "", stack1, helper;
-  buffer += "\n    <div class=\"accordion-item\">\n        <h3>";
+  var buffer = "", stack1, helper, options;
+  buffer += "\n    <div class=\"accordion-item\">\n        "
+    + escapeExpression((helper = helpers.colorme || (depth0 && depth0.colorme),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.wfe), options) : helperMissing.call(depth0, "colorme", (depth0 && depth0.wfe), options)))
+    + "<h3>";
   if (helper = helpers.dateStr) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.dateStr); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)

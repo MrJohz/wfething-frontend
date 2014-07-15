@@ -4,6 +4,11 @@ body {
     background-color: #F5F7F4;
     font-family: 'Raleway', sans-serif;
 }
+
+.accordion-item {
+    position: relative;
+}
+
 .accordion-item h3 { margin: 0 auto;
     font-size: 1.1em;
     padding: 0.4em;
@@ -17,13 +22,19 @@ body {
     user-select: none;
 }
 .accordion-item h3:hover { cursor: pointer; }
+.accordion-item span {
+    position: absolute;
+    right: 0%;
+    padding: 0.4em;
+    font-size: 1.1em;
+}
 .accordion-item.hide h3 { color: #fff; background-color: #64a264; }
 .accordion-item.hide div { display: none; }
 .accordion-item div {
     margin: 0 auto;
     padding: 1em 0.4em;
     background-color: #EAEAE2;
-    border: solid 2px #696;
+    border: solid 2px #64a264;
     border-top-width: 0px;
 }
 

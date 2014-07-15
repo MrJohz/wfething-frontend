@@ -1,5 +1,6 @@
 (function(window) {
 
+
     /** ERROR LISTS & OTHER CONSTANTS **/
     var ERRORS_UNKNOWN_REGION = [
         "Looking for regions like that could land you in a lot of trouble, y'know...",
@@ -56,6 +57,27 @@
         return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
     }
 
+    function stringToColour(str) {
+
+        // str to hash
+        for (var i = 0, hash = 0; i < str.length; hash = str.charCodeAt(i++) + ((hash << 5) - hash));
+
+        // int/hash to hex
+        for (var i = 0, colour = "#"; i < 3; colour += ("00" + ((hash >> i++ * 8) & 0xFF).toString(16)).slice(-2));
+
+        return colour;
+    }
+
+
+    /** SETUP ENVIRONMENT **/
+
+    Handlebars.registerHelper("colorme", function(wfe) {
+        color = stringToColour(wfe)
+
+        str = '<span style="color:' + color + '">&#9673;</span>'
+
+        return new Handlebars.SafeString(str)
+    })
 
 
     /** ACCORDIONATOR: HELPS CREATE ACCORDIONS **/
