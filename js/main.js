@@ -47,8 +47,6 @@
     function domFromString(s) {
         var div = document.createElement('div');
         div.innerHTML = s.trim();
-        console.log(div.innerHTML);
-        console.log(div);
         return div.firstChild;
     }
 
@@ -72,6 +70,7 @@
 
     Accordionator.prototype.accordionate = function(element) {
         var h2;
+        var self = this;
 
         for ( var i = 0; i < element.childNodes.length; i++ ) {
             if ( element.childNodes[i].nodeName == "H3" ) {
@@ -79,22 +78,24 @@
             }
         }
 
-        h2.addEventListener('click', (function(e) {
+        h2.addEventListener('click', function(e) {
+            console.log(this);
+            console.log(this.parentNode);
             var itemClass = this.parentNode.className;
-            this.elems.forEach(function(elem) {
+            self.elems.forEach(function(elem) {
                 elem.className = "accordion-item hide";
             })
             if (itemClass == "accordion-item hide") {
                 this.parentNode.className = 'accordion-item'
             }
-        }).bind(this));
+        });
 
         return element;
     }
 
     Accordionator.prototype.init = function() {
         for ( var i = 1; i < this.elems.length; i++ ) {
-            this.elems[i].className = 'accordionItem hide';
+            this.elems[i].className = 'accordion-item hide';
         }
     }
 
@@ -172,11 +173,14 @@
 
         document.getElementById("results-header").innerHTML = newRegion.name;
         var results = document.getElementById("results");
-        acc.add(domFromString(Handlebars.templates.results(newRegion)));
+        n.node.create(Handlebars.templates.results(newRegion).trim()).all(".accordion-item").each(function(el) {
+            acc.add(el._node /* TODO: Find a better way to put this */);
+        })
         results.innerHTML = "";
         acc.elems.forEach(function(elem) {
             results.appendChild(elem);
         })
+        acc.init();
     })
 
     app.errors.handler("push", function(addition, newErrorList, oldErrorList) {

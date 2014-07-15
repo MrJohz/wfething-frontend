@@ -4,14 +4,25 @@ body {
     background-color: #F5F7F4;
     font-family: 'Raleway', sans-serif;
 }
-.accordion-item h3 { margin: 0 auto; font-size: 1.1em; padding: 0.4em; color: #fff; background-color: green; padding-left: 10%; }
+.accordion-item h3 { margin: 0 auto;
+    font-size: 1.1em;
+    padding: 0.4em;
+    color: #fff;
+    background-color: green;
+    padding-left: 10%;
+    -moz-user-select: none; 
+    -khtml-user-select: none; 
+    -webkit-user-select: none; 
+    -o-user-select: none;
+    user-select: none;
+}
 .accordion-item h3:hover { cursor: pointer; }
-.accordion-item.hide h3 { color: #000; background-color: #78BC3F; }
+.accordion-item.hide h3 { color: #fff; background-color: #64a264; }
 .accordion-item.hide div { display: none; }
 .accordion-item div {
     margin: 0 auto;
     padding: 1em 0.4em;
-    background-color: #F0FFF0;
+    background-color: #EAEAE2;
     border: solid 2px #696;
     border-top-width: 0px;
 }
