@@ -159,7 +159,7 @@
     }
 
     Accordionator.prototype.init = function() {
-        for ( var i = 1; i < this.elems.length; i++ ) {
+        for ( var i = 0; i < this.elems.length; i++ ) {
             this.elems[i].className = 'accordion-item hide';
         }
     }
