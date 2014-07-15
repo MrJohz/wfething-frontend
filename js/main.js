@@ -1,6 +1,6 @@
 (function(window) {
 
-    if (Map in window) {
+    if ("Map" in window) {
         console.log("Using ES6 Map implementation");
     } else {
         window.Map = blitz.Map;
