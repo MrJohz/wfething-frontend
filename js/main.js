@@ -50,7 +50,6 @@
     var HISTORY_EXISTS = ("history" in window && "replaceState" in history);
 
 
-
     /** USEFUL FUNCTIONS **/
 
     var NOOP = function() {}
@@ -122,6 +121,10 @@
 
     function endsWith(str, suffix) {
         return str.indexOf(suffix, str.length - suffix.length) !== -1;
+    }
+
+    function startsWith(str, prefix) {
+        return str.lastIndexOf(prefix, 0) === 0
     }
 
     function changeQueryArgs(newquery, data) {
@@ -341,6 +344,15 @@
             } else {
                 app.getRegion(queries.r);
             }
+        }
+
+        /* TEMPORARY, THIS NEEDS TO BE REMOVED EVENTUALLY */
+        if (startsWith(window.location.host, "wfe2")) {
+            app.errors.push({
+                errorname: 'Out of date URL',
+                errorcode: 435,
+                errortext: 'This URL is out of date.  Please use <a href="http://wfe.johz.me">http://wfe.johz.me</a> in future.'
+            })
         }
 
     }
