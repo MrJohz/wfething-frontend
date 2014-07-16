@@ -1,0 +1,5 @@
+ExpiresActive on
+
+<FilesMatch "\.(html|htm|js|css)$">
+    ExpiresDefault "access plus 1 year"
+</FilesMatch>
