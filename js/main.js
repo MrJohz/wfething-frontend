@@ -45,7 +45,7 @@
         "You've made such an amazing error that we can't even tell what it was!  That's so impressive!  Have you ever thought about applying to be Chief of Printing?"
     ];
     
-    var BASEURL = "http://wfe2.johz.me/"
+    var BASEURL = "http://wfe.johz.me/"
 
     var HISTORY_EXISTS = ("history" in window && "replaceState" in history);
 
