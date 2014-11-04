@@ -18,7 +18,7 @@
         "This region would prefer you to think of it less as a 'nonexistant' region, and more as a 'yet-to-exist' region.",
         "This region doesn't exist.  Pl-HELP I'VE BEEN TRAPPED IN AN ERROR-MESSAGE-MAKING FACTORY!-ease try again.",
         "Searching for regions that don't even exist?  What visionary work!  Have you ever thought about applying to be Chief of Printing?",
-        "Hey, I just met you, and this is crazy, but here's my number, so call me, maybe? Oh, wait, you can't. Because I misspelt my number, like you misspelt that region.  (With all due respect to Solm!)"
+        "Hey, I just met you, and this is crazy, but here's my number, so call me, maybe? Oh, wait, you can't. Because I misspelt my number, like you misspelt that region.  (<3 Solm!)"
     ];
 
     var ERRORS_UNKNOWN_SERVER = [
