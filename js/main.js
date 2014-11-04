@@ -44,8 +44,8 @@
         "You should never see this, therefore it should be safe to say that I never liked Johz anyway, he was a terrible Lieutenant...",
         "You've made such an amazing error that we can't even tell what it was!  That's so impressive!  Have you ever thought about applying to be Chief of Printing?"
     ];
-    
-    var BASEURL = "http://wfe.johz.me/"
+
+    var BASEURL = "http://johz.me/wfe"
 
     var HISTORY_EXISTS = ("history" in window && "replaceState" in history);
 
@@ -83,7 +83,7 @@
                 return choose(ERRORS_UNKNOWN_ERROR_MESSAGE);
         }
     }
-    
+
     function domFromString(s) {
         var div = document.createElement('div');
         div.innerHTML = s.trim();
@@ -136,14 +136,14 @@
 
     function selectText(element) {
         var doc = document;
-        var text = element;    
+        var text = element;
 
         if (doc.body.createTextRange) { // ms
             var range = doc.body.createTextRange();
             range.moveToElementText(text);
             range.select();
         } else if (window.getSelection) { // moz, opera, webkit
-            var selection = window.getSelection();            
+            var selection = window.getSelection();
             var range = doc.createRange();
             range.selectNodeContents(text);
             selection.removeAllRanges();
@@ -360,4 +360,3 @@
     domready(onLoadFunc);
 
 })(window);
-
